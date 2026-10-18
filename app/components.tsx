@@ -34,7 +34,7 @@ const Link = ({ label, href }: { label: string; href?: string }) =>
 
 const COLS: [string, [string, string?][]][] = [
   ["Project", [["Source on GitHub", REPO], ["README", `${BLOB}/README.md`], ["Changelog", `${BLOB}/CHANGELOG.md`]]],
-  ["Tools", [["ashvm", `${TREE}/hearth/ashvm`], ["kiln", `${TREE}/hearth/kiln`], ["apm", `${TREE}/hearth/apm`], ["mnemo"]]],
+  ["Tools", [["ashvm", `${TREE}/hearth/ashvm`], ["kiln", `${TREE}/hearth/kiln`], ["apm", `${TREE}/hearth/apm`], ["mnemo", `${TREE}/hearth/mnemo`]]],
   ["Status", [["Pre-release"], ["No version number yet"]]],
 ];
 
