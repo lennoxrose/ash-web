@@ -9,7 +9,8 @@ export default function Eggs({ art }: { art: string }) {
   useEffect(() => {
     // Console: the logo, coloured per character, then a greeting.
     const args: string[] = [];
-    const fmt = (art.match(/(.)\1*|\n/gs) ?? []).map((run) => { args.push(`color:${COLORS[run[0]] ?? "inherit"}`, run); return "%c%s"; }).join("");
+    // DevTools misparses a "%" inside a %s value, so the "%" shade is drawn as "@" (colour is chosen by the original character).
+    const fmt = (art.match(/(.)\1*|\n/gs) ?? []).map((run) => { args.push(`color:${COLORS[run[0]] ?? "inherit"}`, run.replaceAll("%", "@")); return "%c%s"; }).join("");
     console.log(fmt, ...args);
     console.log("%cHello, Ash!%c " + REPO, "font:700 16px monospace;color:#A22822", "");
 
