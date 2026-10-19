@@ -29,14 +29,22 @@ have() { command -v "$1" >/dev/null 2>&1; }
 logo() {
   cat <<'EOF'
 
-       ##%%
-     ####%%%%
-   ######%%%%%%
-  ***####%%%%###
-   *****####%%
-     ====*****
-      ===***
-       ==*
+             ##%%
+           ####%%%%
+         %#####%%%%%%
+       ########%%%%%%%%
+     ##########%%%%%%%%%%
+    ###########%%%%%%%%%%%
+    ***########%%%%%%%%%##
+     *****#####%%%%%%####
+      *******##%%#######
+       ******++*#######
+        **++===****###
+         +=====******
+          +====*****
+           ====****
+             ==**
+              =*
 
   Ash: A Java-like language, built from scratch in C.
 
@@ -126,7 +134,7 @@ detect_platform() {
     *) unsupported "$PLATFORM" "supported: $SUPPORTED" ;;
   esac
   if [ "$os" = linux ] && [ ! -e /lib64/ld-linux-x86-64.so.2 ]; then
-    unsupported "$PLATFORM without glibc" "the release binaries need glibc (not musl/Alpine)"
+    unsupported "$PLATFORM without glibc" "the release binaries need glibc, not musl/Alpine"
   fi
 }
 
@@ -226,15 +234,19 @@ install() {
   done <"$tmp/files"
 
   missing=""
+  glibc=""
   if have ldd; then
-    missing=$(ldd "$ASH_DIR/bin/ashvm" 2>/dev/null | awk '/not found/ { printf "%s ", $1 }')
+    check=$(ldd "$ASH_DIR/bin/ashvm" 2>&1 || true)
+    missing=$(printf '%s\n' "$check" | awk '/=> not found/ { printf "%s ", $1 }')
+    glibc=$(printf '%s\n' "$check" | grep 'not found' | grep -o 'GLIBC_[0-9.]*' | sort -u | tr '\n' ' ' || true)
   fi
 
   step "Installed Ash $new"
   setup_path
-  if [ -n "$missing" ]; then
-    warn "ashvm needs shared libraries that are missing on this system: $missing"
-    warn "Install them with your package manager, then run: ashvm --help"
+  if [ -n "$glibc" ] || [ -n "$missing" ]; then
+    [ -z "$glibc" ] || warn "this system's glibc is too old for this release (needs: $glibc)"
+    [ -z "$missing" ] || warn "missing shared libraries: $missing(install them with your package manager)"
+    warn "ashvm will not start until that is fixed"
   elif on_path; then
     say "Run: ashvm --help"
   else
