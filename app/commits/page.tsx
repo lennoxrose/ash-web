@@ -1,5 +1,5 @@
-import { dayKey, fmtDate, fmtTime, plural } from "../../lib/format";
-import { getCommits, type Commit } from "../../lib/github";
+import { changeBar, dayKey, fmtDate, fmtTime, plural } from "../../lib/format";
+import { getCommit, getCommits, type Commit } from "../../lib/github";
 import { Button } from "../components";
 import { pageMeta } from "../meta";
 import { Band, Fallback, PageBody } from "../page-parts";
@@ -17,12 +17,20 @@ const groups = (commits: Commit[]) => {
   return [...out.values()];
 };
 
-const Row = ({ c }: { c: Commit }) => (
+type Stats = { additions: number; deletions: number } | undefined;
+
+const Row = ({ c, s }: { c: Commit; s: Stats }) => (
   <li>
     <a className="crow" href={`/commits/${c.sha}`}>
       <span className="c-text">
         <b>{c.commit.message.split("\n")[0]}</b>
         <span>{c.author?.login ?? c.commit.author?.name ?? "unknown"} committed at <time dateTime={when(c)}>{fmtTime(when(c))}</time></span>
+        {s && (
+          <span className="cdiff">
+            <b className="plus">+{s.additions}</b><b className="minus">−{s.deletions}</b>
+            <span className="bar" aria-hidden="true">{changeBar(s.additions, s.deletions).map((k, i) => <i key={i} className={k} />)}</span>
+          </span>
+        )}
       </span>
       <span className="c-act">
         <span className="sha">{c.sha.slice(0, 7)}</span>
@@ -35,6 +43,11 @@ const Row = ({ c }: { c: Commit }) => (
 
 export default async function Commits() {
   const commits = (await getCommits())?.filter((c) => when(c));
+  // The list endpoint has no line counts. Each commit's detail is immutable and cached for a day, so this is cheap after the first run.
+  const stats = new Map(await Promise.all((commits ?? []).map(async (c) => {
+    const d = await getCommit(c.sha);
+    return [c.sha, typeof d === "string" ? undefined : d.stats] as const;
+  })));
   return (
     <>
       <Band tone="red" title="Commit history">Latest changes to lennoxrose/ash on main. Times are UTC.</Band>
@@ -51,7 +64,7 @@ export default async function Commits() {
               {groups(commits).map((g) => (
                 <section key={dayKey(when(g[0]))}>
                   <h2>Commits on {fmtDate(when(g[0]))}</h2>
-                  <ul>{g.map((c) => <Row key={c.sha} c={c} />)}</ul>
+                  <ul>{g.map((c) => <Row key={c.sha} c={c} s={stats.get(c.sha)} />)}</ul>
                 </section>
               ))}
             </div>

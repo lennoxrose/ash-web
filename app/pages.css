@@ -34,8 +34,13 @@ hr { border: 0; height: 1px; background: var(--line); }
 .chev { font-size: 26px; line-height: 1; }
 .crow:hover .chev { transform: translateX(3px); }
 .vc { display: none; font-size: 13px; line-height: 1.4; }
-.c-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; font-size: 13px; line-height: 1.4; color: var(--muted); overflow-wrap: anywhere; }
-.c-text b { font-size: 16px; font-weight: 600; color: var(--fg); }
+.c-text { flex: 0 1 860px; display: flex; flex-direction: column; gap: 4px; min-width: 0; font-size: 13px; line-height: 1.4; color: var(--muted); overflow-wrap: anywhere; }
+.plus { color: var(--plus); } .minus { color: var(--minus); }
+.cdiff { font-weight: 700; display: flex; align-items: center; gap: 10px; padding-top: 2px; font-size: 13px; line-height: 1.4; }
+.bar { display: flex; gap: 2px; }
+.bar i { width: 10px; height: 10px; border-radius: 2px; background: var(--line); }
+.bar .add { background: var(--plus); } .bar .del { background: var(--minus); }
+.c-text > b { font-size: 16px; font-weight: 600; color: var(--fg); }
 .sha { flex: none; padding: 4px 10px; border: 1.5px solid var(--line); border-radius: 4px; color: var(--accent); font-size: 13px; line-height: 1.4; font-weight: 600; }
 
 @media (max-width: 768px) {
@@ -56,6 +61,7 @@ hr { border: 0; height: 1px; background: var(--line); }
   .crow { flex-direction: column; align-items: flex-start; gap: 10px; padding: 16px; }
   .chev { display: none; }
   .vc { display: inline; }
-  .c-text { font-size: 12px; }
-  .c-text b { font-size: 14px; }
+  .c-text { flex: none; font-size: 12px; }
+  .cdiff { font-size: 12px; }
+  .c-text > b { font-size: 14px; }
 }
