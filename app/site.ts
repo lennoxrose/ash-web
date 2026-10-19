@@ -7,3 +7,6 @@ export const BLOB = `${REPO}/blob/main`;
 export const TREE = `${REPO}/tree/main`;
 export const TAGLINE = "A Java-like language, built from scratch in C.";
 export const DESCRIPTION = `${TAGLINE} One front end, two engines: a VM or a native binary.`;
+export const RELEASES = `${REPO}/releases`;
+
+export const INSTALL_CMD = "curl -fsSL https://ash-project.org/install.sh | sh";

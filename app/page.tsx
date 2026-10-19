@@ -1,10 +1,15 @@
+import { getReleases, latestOf } from "../lib/github";
 import { Button, Code, Cols, Section } from "./components";
+import { InstallBar } from "./install";
 import { REPO, TAGLINE } from "./site";
+
+export const revalidate = 3600;
 
 const hello = ["package examples;", "", "public class HelloWorld {", "    public static void main(String[] args) {", '        System.out.println("Hello, Ash!");', "    }", "}"];
 const build = ["git clone https://github.com/lennoxrose/ash.git && cd ash", "tools/install.sh", "make", "bin/ashvm run Main.ash", "bin/kiln Main.ash -o main"];
 
-export default function Home() {
+export default async function Home() {
+  const latest = latestOf(await getReleases());
   return (
     <>
       <section className="hero inner">
@@ -35,7 +40,9 @@ export default function Home() {
         ]} />
       </Section>
       <Section tone="orange" title="Get started" id="get-started">
-        <p>There are no packaged installs or releases yet. Build it from source.</p>
+        <p>Install the beta with one command, or build it from source.</p>
+        <InstallBar label={`Install · Linux x86_64${latest ? ` · ${latest.tag_name}` : ""}`} note />
+        <h3 className="sub">Or build from source</h3>
         <Code lines={build} wide />
         <p>make builds bin/ashvm, bin/kiln and apm. ashvm runs the source, kiln turns it into a native binary.</p>
         <Button href={REPO} tone="maroon">View on GitHub</Button>

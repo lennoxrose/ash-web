@@ -27,7 +27,8 @@ h3 { font-size: 24px; line-height: 1.3; font-weight: 600; }
 .konami .facet:nth-child(2n) { animation-delay: .15s; }
 @keyframes spin { 50% { transform: rotate(180deg); filter: brightness(1.5); } to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .konami .facet { animation: none; filter: brightness(1.4); } }
-.nav nav { display: flex; gap: 36px; color: var(--ink); }
+.nav nav { display: flex; gap: clamp(18px, 2.5vw, 36px); color: var(--ink); }
+.nav nav a[aria-current] { font-weight: 700; color: var(--maroon); }
 .menu { display: none; flex-direction: column; gap: 6px; padding: 8px; margin: -8px; border: 0; background: none; cursor: pointer; }
 .menu i { width: 28px; height: 3px; border-radius: 2px; background: var(--maroon); }
 
@@ -65,19 +66,22 @@ h3 { font-size: 24px; line-height: 1.3; font-weight: 600; }
 .credit { align-self: center; padding-top: 16px; font-size: 14px; line-height: 1.4; }
 
 @media (max-width: 1100px) { .cols:has(.tag) { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 900px) {
+  .nav nav { display: none; }
+  .nav nav.open { display: flex; flex-direction: column; gap: 16px; position: absolute; z-index: 5; top: 100%; left: 0; right: 0; padding: 20px var(--gx); background: #fff; border-top: 1px solid var(--maroon); border-bottom: 1px solid var(--maroon); }
+  .menu { display: flex; }
+}
 
 @media (max-width: 768px) {
   :root { --gx: 20px; }
   .sec { padding-block: 60px 50px; }
   .white { padding-block: 30px 50px; }
+  .ink { padding-block: 30px; }
   h2 { font-size: 26px; }
   h3 { font-size: 20px; }
   .sec p, .links a, .links span { font-size: 14px; }
   .brand { font-size: 28px; }
   .logo { width: 48px; height: 48px; }
-  .nav nav { display: none; }
-  .nav nav.open { display: flex; flex-direction: column; gap: 16px; position: absolute; z-index: 5; top: 100%; left: 0; right: 0; padding: 20px var(--gx); background: #fff; border-top: 1px solid var(--maroon); border-bottom: 1px solid var(--maroon); }
-  .menu { display: flex; }
   .hero { padding-block: 30px 60px; }
   .hero h1 { font-size: 44px; }
   .lede { font-size: 24px; }

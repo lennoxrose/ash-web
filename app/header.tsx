@@ -1,8 +1,9 @@
 "use client";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { REPO } from "./site";
 
-const NAV: [string, string][] = [["Why Ash", "/#why-ash"], ["Tools", "/#tools"], ["Get started", "/#get-started"], ["GitHub", REPO]];
+const NAV: [string, string][] = [["Why Ash", "/#why-ash"], ["Tools", "/#tools"], ["Ecosystem", "/ecosystem"], ["Releases", "/releases"], ["Commits", "/commits"], ["GitHub", REPO]];
 
 const Logo = () => (
   <svg viewBox="0 0 37.8 52.8" width={38} height={53} role="img" aria-label="Ash logo">
@@ -17,6 +18,7 @@ const Logo = () => (
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
+  const path = usePathname();
   useEffect(() => {
     const esc = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     addEventListener("keydown", esc);
@@ -26,7 +28,7 @@ export const Header = () => {
     <header className="inner nav">
       <a className="brand" href="/"><span className="logo"><Logo /></span>Ash</a>
       <nav id="site-nav" aria-label="Main" className={open ? "open" : ""}>
-        {NAV.map(([l, h]) => <a key={l} href={h} onClick={() => setOpen(false)} {...(h.startsWith("http") && { rel: "noopener noreferrer" })}>{l}</a>)}
+        {NAV.map(([l, h]) => <a key={l} href={h} aria-current={h === path ? "page" : undefined} onClick={() => setOpen(false)} {...(h.startsWith("http") && { rel: "noopener noreferrer" })}>{l}</a>)}
       </nav>
       <button type="button" className="menu" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="site-nav" onClick={() => setOpen(!open)}><i /><i /><i /></button>
     </header>

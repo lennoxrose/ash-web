@@ -1,0 +1,38 @@
+/* Shared by the home page and the sub-pages: title band, page body, install bar, fallbacks. */
+.links { grid-template-columns: repeat(4, 1fr); }
+.band { padding-block: 60px; }
+.band .inner { gap: 12px; }
+.band h1 { font-size: 56px; line-height: 1.2; }
+.band p { font-size: 18px; max-width: 900px; }
+.pg { padding-block: 60px 80px; }
+.sub { font-size: 20px; line-height: 1.3; }
+.btn.sm { font-size: 14px; }
+.btn.w380 { width: 380px; }
+.btn.w440 { width: 440px; }
+.fallback { padding: 24px; border: 1px solid #e6d7d3; border-radius: 6px; color: var(--ink); }
+.fallback a, .note a { text-decoration: underline; text-underline-offset: 3px; }
+
+.install { display: flex; flex-direction: column; gap: 10px; width: 900px; max-width: 100%; }
+.lbl { font-size: 13px; line-height: 1.4; font-weight: 600; letter-spacing: 1px; }
+.note { font-size: 13px; line-height: 1.4; }
+.cmd { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 20px 20px 24px; border-radius: 4px; background: #1a0a0a; color: #fff; }
+.cmd code { font: inherit; font-size: 15px; line-height: 1.5; overflow-wrap: anywhere; }
+.copy { flex: none; width: 100px; padding: 10px 16px; border: 0; border-radius: 4px; background: var(--amber); color: #000; font: inherit; font-size: 14px; line-height: 1.4; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; }
+.callout { display: flex; flex-direction: column; gap: 10px; }
+.callout h2 { font-size: 20px; line-height: 1.3; color: var(--maroon); }
+
+@media (max-width: 900px) { .links { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) {
+  .links { grid-template-columns: 1fr; gap: 30px; }
+  .band { padding-block: 40px; }
+  .band h1 { font-size: 34px; }
+  .band p { font-size: 14px; }
+  .pg { padding-block: 30px 50px; }
+  .sub, .callout h2 { font-size: 18px; }
+  .btn.sm, .btn.w380, .btn.w440 { width: 100%; font-size: 12px; }
+  .btn.w440 { font-size: 11px; }
+  .lbl, .note { font-size: 12px; }
+  .cmd { flex-direction: column; align-items: stretch; padding: 16px; }
+  .cmd code { font-size: 12px; }
+  .copy { width: 100%; }
+}

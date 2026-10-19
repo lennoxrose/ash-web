@@ -6,6 +6,7 @@ import Eggs from "./eggs";
 import { Header } from "./header";
 import { DESCRIPTION, GH_USER, REPO, SITE_URL, TAGLINE } from "./site";
 import "./globals.css";
+import "./shared.css";
 
 const fira = localFont({
   src: [
