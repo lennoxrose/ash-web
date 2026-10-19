@@ -1,6 +1,8 @@
 import localFont from "next/font/local";
 import type { Metadata, Viewport } from "next";
 import { Footer } from "./components";
+import { art } from "./ascii";
+import Eggs from "./eggs";
 import { Header } from "./header";
 import { DESCRIPTION, GH_USER, REPO, SITE_URL, TAGLINE } from "./site";
 import "./globals.css";
@@ -42,6 +44,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <Eggs art={art()} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
     </html>
