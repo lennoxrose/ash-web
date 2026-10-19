@@ -1,0 +1,45 @@
+/* Commit detail: title band, info row, file diff cards. */
+.band.detail { padding-block: 50px; }
+.band .back { align-self: flex-start; font-size: 15px; line-height: 1.4; font-weight: 600; white-space: nowrap; }
+.band.detail h1 { font-size: 40px; line-height: 1.25; overflow-wrap: anywhere; }
+.band .by { font-size: 16px; line-height: 1.4; }
+.pg.detail { padding-top: 50px; }
+.pg.detail .inner { gap: 24px; }
+.cinfo { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.hashes { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.plabel, .cstats { font-size: 13px; line-height: 1.4; color: var(--muted); }
+.pill.ghost { border-color: var(--line); }
+.cstats { display: flex; gap: 12px; align-items: center; font-size: 15px; color: var(--fg); }
+.cstats b:first-child { font-weight: 600; }
+.plus { color: var(--plus); } .minus { color: var(--minus); }
+.msgbody { font: inherit; font-size: 14px; line-height: 1.6; color: var(--fg); white-space: pre-wrap; overflow-wrap: anywhere; }
+.file { border: 1px solid var(--line); border-radius: 6px; background: var(--card); overflow: hidden; }
+.fhead { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 24px; background: var(--tint); }
+.fhead h2 { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 16px; line-height: 1.4; font-weight: 600; color: var(--fg); }
+.fname { overflow-wrap: anywhere; }
+.fpill { padding: 4px 10px; border: 1.5px solid var(--muted); border-radius: 4px; color: var(--muted); font-size: 11px; line-height: 1.4; font-weight: 600; }
+.fstats { display: flex; gap: 10px; font-size: 14px; line-height: 1.4; }
+.dr { display: flex; padding-block: 3px; line-height: 1.5; }
+.dr .no { flex: none; width: 56px; font-size: 12px; text-align: right; color: var(--muted); }
+.dr code { flex: 1; min-width: 0; margin-left: 16px; font: inherit; font-size: 13px; color: var(--fg); white-space: pre-wrap; overflow-wrap: anywhere; }
+.dr.hunk { background: var(--tint); } .dr.hunk code, .dr.note code { color: var(--muted); }
+.dr.add { background: var(--add); } .dr.del { background: var(--del); }
+.nodiff { padding: 16px 24px; font-size: 14px; color: var(--muted); }
+.nodiff a { text-decoration: underline; text-underline-offset: 3px; }
+.big summary { padding: 14px 24px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--accent); }
+.actions { display: flex; flex-direction: column; gap: 12px; }
+.btn.outline { background: transparent; border: 1.5px solid var(--accent); color: var(--accent); }
+@media (max-width: 768px) {
+  .band.detail { padding-block: 36px; }
+  .band .back, .band .by { font-size: 13px; }
+  .band.detail h1 { font-size: 24px; }
+  .cinfo { flex-direction: column; align-items: flex-start; }
+  .cstats { font-size: 13px; }
+  .fhead { flex-direction: column; align-items: flex-start; gap: 8px; padding: 14px 16px; }
+  .fhead h2 { font-size: 14px; }
+  .fstats { font-size: 13px; }
+  .dr .no { width: 30px; font-size: 11px; }
+  .dr code { margin-left: 10px; font-size: 12px; }
+  .nodiff, .big summary { padding-inline: 16px; }
+  .btn.outline { padding: 14px 16px; }
+}

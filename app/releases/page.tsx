@@ -7,7 +7,8 @@ import { RELEASES } from "../site";
 import { ReleaseCard } from "./card";
 import "../pages.css";
 
-export const revalidate = 3600;
+export const revalidate = 600;
+export const dynamic = "force-static";
 export const metadata = pageMeta("/releases", "Ash releases: downloads and checksums", "Every Ash release with downloads and checksums.");
 
 export default async function Releases() {

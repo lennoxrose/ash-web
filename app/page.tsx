@@ -3,7 +3,8 @@ import { Button, Code, Cols, Section } from "./components";
 import { InstallBar } from "./install";
 import { REPO, TAGLINE } from "./site";
 
-export const revalidate = 3600;
+export const revalidate = 600;
+export const dynamic = "force-static";
 
 const hello = ["package examples;", "", "public class HelloWorld {", "    public static void main(String[] args) {", '        System.out.println("Hello, Ash!");', "    }", "}"];
 const build = ["git clone https://github.com/lennoxrose/ash.git && cd ash", "tools/install.sh", "make", "bin/ashvm run Main.ash", "bin/kiln Main.ash -o main"];

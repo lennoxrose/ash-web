@@ -6,7 +6,8 @@ import { Band, Fallback, PageBody } from "../page-parts";
 import { REPO } from "../site";
 import "../pages.css";
 
-export const revalidate = 3600;
+export const revalidate = 600;
+export const dynamic = "force-static";
 export const metadata = pageMeta("/commits", "Ash commit history on main", "Latest changes to lennoxrose/ash on main. Times are UTC.");
 
 const when = (c: Commit) => (c.commit.committer ?? c.commit.author)?.date ?? "";
@@ -18,11 +19,17 @@ const groups = (commits: Commit[]) => {
 
 const Row = ({ c }: { c: Commit }) => (
   <li>
-    <div className="c-text">
-      <b>{c.commit.message.split("\n")[0]}</b>
-      <span>{c.author?.login ?? c.commit.author?.name ?? "unknown"} committed at <time dateTime={when(c)}>{fmtTime(when(c))}</time></span>
-    </div>
-    <a className="sha" href={c.html_url} rel="noopener noreferrer" aria-label={`Commit ${c.sha.slice(0, 7)}`}>{c.sha.slice(0, 7)}</a>
+    <a className="crow" href={`/commits/${c.sha}`}>
+      <span className="c-text">
+        <b>{c.commit.message.split("\n")[0]}</b>
+        <span>{c.author?.login ?? c.commit.author?.name ?? "unknown"} committed at <time dateTime={when(c)}>{fmtTime(when(c))}</time></span>
+      </span>
+      <span className="c-act">
+        <span className="sha">{c.sha.slice(0, 7)}</span>
+        <span className="chev" aria-hidden="true">›</span>
+        <span className="vc">View changes ›</span>
+      </span>
+    </a>
   </li>
 );
 

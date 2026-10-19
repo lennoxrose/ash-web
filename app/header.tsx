@@ -2,6 +2,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { REPO } from "./site";
+import ThemeToggle from "./theme";
 
 const NAV: [string, string][] = [["Why Ash", "/#why-ash"], ["Tools", "/#tools"], ["Ecosystem", "/ecosystem"], ["Releases", "/releases"], ["Commits", "/commits"], ["GitHub", REPO]];
 
@@ -27,10 +28,13 @@ export const Header = () => {
   return (
     <header className="inner nav">
       <a className="brand" href="/"><span className="logo"><Logo /></span>Ash</a>
-      <nav id="site-nav" aria-label="Main" className={open ? "open" : ""}>
-        {NAV.map(([l, h]) => <a key={l} href={h} aria-current={h === path ? "page" : undefined} onClick={() => setOpen(false)} {...(h.startsWith("http") && { rel: "noopener noreferrer" })}>{l}</a>)}
-      </nav>
-      <button type="button" className="menu" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="site-nav" onClick={() => setOpen(!open)}><i /><i /><i /></button>
+      <div className="right">
+        <nav id="site-nav" aria-label="Main" className={open ? "open" : ""}>
+          {NAV.map(([l, h]) => <a key={l} href={h} aria-current={h === path || (h === "/commits" && path.startsWith("/commits/")) ? "page" : undefined} onClick={() => setOpen(false)} {...(h.startsWith("http") && { rel: "noopener noreferrer" })}>{l}</a>)}
+        </nav>
+        <ThemeToggle />
+        <button type="button" className="menu" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="site-nav" onClick={() => setOpen(!open)}><i /><i /><i /></button>
+      </div>
     </header>
   );
 };

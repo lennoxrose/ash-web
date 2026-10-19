@@ -10,10 +10,10 @@ export const Band = ({ tone, title, children }: { tone: string; title: string; c
   </section>
 );
 
-export const PageBody = ({ children }: { children: ReactNode }) => (
-  <section className="sec pg"><div className="inner">{children}</div></section>
+export const PageBody = ({ children, cls = "" }: { children: ReactNode; cls?: string }) => (
+  <section className={`sec pg ${cls}`}><div className="inner">{children}</div></section>
 );
 
-export const Fallback = ({ href = REPO }: { href?: string }) => (
-  <p className="fallback" role="status">Couldn&apos;t load this from GitHub right now. <a href={href} rel="noopener noreferrer">View it on GitHub</a>.</p>
+export const Fallback = ({ href = REPO, what = "this" }: { href?: string; what?: string }) => (
+  <p className="fallback" role="status">Couldn&apos;t load {what} from GitHub right now. <a href={href} rel="noopener noreferrer">View it on GitHub</a>.</p>
 );

@@ -35,11 +35,15 @@ export const metadata: Metadata = {
 };
 export const viewport: Viewport = { themeColor: "#A22822", colorScheme: "light" };
 
+// Runs before first paint so a saved dark choice never flashes light. Light is the default; the OS setting is ignored.
+const THEME_BOOT = `try{if(localStorage.getItem("ash-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}`;
+
 const jsonLd = { "@context": "https://schema.org", "@type": "SoftwareSourceCode", name: "Ash", description: DESCRIPTION, codeRepository: REPO, programmingLanguage: "C", url: SITE_URL, author: { "@type": "Person", name: "lennoxrose", url: GH_USER } };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head><script dangerouslySetInnerHTML={{ __html: THEME_BOOT }} /></head>
       <body className={fira.className}>
         <a className="skip" href="#main">Skip to content</a>
         <Header />
