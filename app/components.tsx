@@ -62,7 +62,7 @@ export async function Footer() {
             ) : <Link label="Releases on GitHub" href={RELEASES} />}
           </div>
         </div>
-        <p className="credit"><a href={GH_USER} rel="noopener noreferrer">Made by lennoxrose</a></p>
+        <p className="credit"><a href={GH_USER} rel="noopener noreferrer">Made by lennoxrose</a> · <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a> · <a href="/nutzungsbedingungen">Nutzungsbedingungen</a></p>
       </div>
     </footer>
   );

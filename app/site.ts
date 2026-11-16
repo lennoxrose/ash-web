@@ -9,4 +9,6 @@ export const TAGLINE = "A Java-like language, built from scratch in C.";
 export const DESCRIPTION = `${TAGLINE} One front end, two engines: a VM or a native binary.`;
 export const RELEASES = `${REPO}/releases`;
 
+export const OWNER = { name: "Lennox Dethloff", street: "c/o Online-Impressum, Europaring 90", city: "53757 Sankt Augustin", country: "Deutschland", email: "lenni1107@icloud.com" };
+
 export const INSTALL_CMD = "curl -fsSL https://ash-project.org/install.sh | sh";
